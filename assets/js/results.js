@@ -176,7 +176,7 @@ function renderTopBidders(paintingId) {
   }
   for (const bidder of bidders) {
     const item = document.createElement("li");
-    item.innerHTML = `${bidder.name} <span>${formatCredits(bidder.credits)} credits</span>`;
+    item.textContent = bidder.name;
     elements.topBidders.append(item);
   }
 }
