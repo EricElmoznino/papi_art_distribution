@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Papi Art Distribution</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script type="module" src="assets/js/user.js"></script>
+  </head>
+  <body>
+    <header class="topbar participant-topbar">
+      <div class="brand-block">
+        <p class="eyebrow">Papi Art Distribution</p>
+        <h1>Choose Your Paintings</h1>
+      </div>
+      <div class="credit-panel" aria-live="polite">
+        <div>
+          <span class="metric-label">Remaining</span>
+          <strong id="remainingCredits">100</strong>
+        </div>
+        <div>
+          <span class="metric-label">Allocated</span>
+          <strong id="allocatedCredits">0</strong>
+        </div>
+        <div>
+          <span class="metric-label">Paintings</span>
+          <strong id="selectedCount">0</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-shell participant-shell">
+      <section class="notice-strip" role="note">
+        Please do not press the browser back button while making selections, or the current screen may be lost.
+      </section>
+
+      <section class="entry-panel">
+        <label class="field-label" for="participantName">Your name</label>
+        <input id="participantName" class="text-input" type="text" autocomplete="name" placeholder="Enter your name">
+        <p class="compact-help">Allocate exactly 100 credits, no more than 50 on one painting, across at least 6 paintings.</p>
+      </section>
+
+      <section class="sticky-summary" aria-label="Current selections">
+        <div class="selection-strip" id="selectionStrip">
+          <span class="muted">No credits allocated yet.</span>
+        </div>
+        <div class="action-row">
+          <button id="copySubmission" class="primary-button" type="button" disabled>Copy Data</button>
+          <button id="clearBids" class="secondary-button" type="button">Clear</button>
+        </div>
+        <p id="validationMessage" class="validation-message" role="status"></p>
+        <textarea id="submissionOutput" class="submission-output" readonly aria-label="Copied submission data"></textarea>
+      </section>
+
+      <section id="paintingList" class="painting-list" aria-label="Paintings"></section>
+    </main>
+
+    <div id="imageModal" class="image-modal" hidden>
+      <div class="modal-toolbar">
+        <div>
+          <p id="modalTitle" class="modal-title"></p>
+          <p id="modalMeta" class="modal-meta"></p>
+        </div>
+        <div class="modal-actions">
+          <button id="zoomOut" class="icon-button" type="button" aria-label="Zoom out">-</button>
+          <button id="zoomReset" class="icon-button" type="button" aria-label="Reset zoom">Fit</button>
+          <button id="zoomIn" class="icon-button" type="button" aria-label="Zoom in">+</button>
+          <button id="closeModal" class="icon-button close-button" type="button" aria-label="Close image">x</button>
+        </div>
+      </div>
+      <div id="modalImageWrap" class="modal-image-wrap">
+        <img id="modalImage" alt="">
+      </div>
+    </div>
+  </body>
+</html>

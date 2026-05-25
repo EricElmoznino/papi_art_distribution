@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Auction Master | Papi Art Distribution</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script type="module" src="assets/js/master.js"></script>
+  </head>
+  <body>
+    <header class="topbar master-topbar">
+      <div class="brand-block">
+        <p class="eyebrow">Auction Master</p>
+        <h1>Collect Entries</h1>
+      </div>
+      <nav class="page-nav" aria-label="Pages">
+        <a href="index.html">Participant Page</a>
+        <a href="results.html">Results</a>
+      </nav>
+    </header>
+
+    <main class="page-shell master-shell">
+      <section class="panel-grid">
+        <div class="control-panel">
+          <h2>Paste submissions</h2>
+          <p class="compact-help">Paste one or more copied participant messages. A newer message with the same name replaces the older entry.</p>
+          <textarea id="submissionInput" class="large-textarea" placeholder="Paste copied data here"></textarea>
+          <div class="action-row">
+            <button id="parseSubmissions" class="primary-button" type="button">Add Submissions</button>
+            <button id="clearPaste" class="secondary-button" type="button">Clear Paste Box</button>
+          </div>
+          <div id="parseMessages" class="message-stack" role="status"></div>
+        </div>
+
+        <div class="control-panel">
+          <h2>Auction setup</h2>
+          <label class="field-label" for="auctionSeed">Tie-break seed</label>
+          <input id="auctionSeed" class="text-input" type="text" value="papi-art-2026">
+          <p class="compact-help">The same seed and same submissions always produce the same allocation.</p>
+          <div class="action-row">
+            <button id="runAuction" class="primary-button" type="button">Run Auction</button>
+            <button id="downloadBackup" class="secondary-button" type="button">Download Backup</button>
+          </div>
+          <p id="auctionStatus" class="validation-message"></p>
+        </div>
+      </section>
+
+      <section class="control-panel">
+        <div class="section-heading-row">
+          <h2>Participants</h2>
+          <button id="newManualEntry" class="secondary-button" type="button">Manual Entry</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Total</th>
+                <th>Paintings</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="participantRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="manualEditor" class="control-panel manual-editor" hidden>
+        <div class="section-heading-row">
+          <h2 id="editorTitle">Manual Entry</h2>
+          <button id="closeEditor" class="icon-button close-button" type="button" aria-label="Close editor">x</button>
+        </div>
+        <label class="field-label" for="editorName">Participant name</label>
+        <input id="editorName" class="text-input" type="text">
+        <div class="editor-summary" id="editorSummary"></div>
+        <div id="editorGrid" class="editor-grid"></div>
+        <div class="action-row">
+          <button id="saveManualEntry" class="primary-button" type="button">Save Entry</button>
+          <button id="deleteManualEntry" class="danger-button" type="button">Delete Entry</button>
+        </div>
+        <p id="editorMessage" class="validation-message"></p>
+      </section>
+    </main>
+  </body>
+</html>

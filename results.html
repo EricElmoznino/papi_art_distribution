@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Results | Papi Art Distribution</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script type="module" src="assets/js/results.js"></script>
+  </head>
+  <body class="results-body">
+    <header class="topbar results-topbar">
+      <div class="brand-block">
+        <p class="eyebrow">Live Results</p>
+        <h1>Papi Art Distribution</h1>
+      </div>
+      <nav class="page-nav" aria-label="Pages">
+        <a href="master.html">Auction Master</a>
+      </nav>
+    </header>
+
+    <main class="results-shell">
+      <section id="noAuction" class="control-panel empty-state" hidden>
+        <h2>No auction loaded</h2>
+        <p>Run the auction from the auction-master page first.</p>
+        <a class="primary-link" href="master.html">Go to Auction Master</a>
+      </section>
+
+      <section id="resultsStage" class="results-stage" hidden>
+        <aside class="results-progress">
+          <div>
+            <span class="metric-label">Painting</span>
+            <strong id="progressCount">1 / 1</strong>
+          </div>
+          <div>
+            <span class="metric-label">Accepted</span>
+            <strong id="acceptedCount">0</strong>
+          </div>
+          <div>
+            <span class="metric-label">Opted out</span>
+            <strong id="optOutCount">0</strong>
+          </div>
+        </aside>
+
+        <section class="feature-painting">
+          <div class="feature-image-wrap">
+            <img id="featureImage" alt="">
+          </div>
+          <div class="feature-copy">
+            <p id="featureNumber" class="eyebrow"></p>
+            <h2 id="featureName"></h2>
+            <p id="featureMeta" class="feature-meta"></p>
+            <p id="featureDescription" class="feature-description"></p>
+
+            <div class="top-bidders">
+              <h3>Top initial interest</h3>
+              <ol id="topBidderList"></ol>
+            </div>
+
+            <div id="winnerPanel" class="winner-panel" hidden>
+              <span class="metric-label">Winner</span>
+              <strong id="winnerName"></strong>
+            </div>
+
+            <div class="result-actions">
+              <button id="primaryResultAction" class="primary-button" type="button">Reveal Winner</button>
+              <button id="optOutWinner" class="danger-button" type="button" hidden>Winner Opts Out</button>
+              <button id="summaryToggle" class="secondary-button" type="button">Show Table</button>
+            </div>
+            <p id="resultMessage" class="validation-message"></p>
+          </div>
+        </section>
+
+        <section id="summaryPanel" class="summary-panel" hidden>
+          <div class="section-heading-row">
+            <h2>Allocation Table</h2>
+            <button id="closeSummary" class="icon-button close-button" type="button" aria-label="Close table">x</button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table summary-table">
+              <thead>
+                <tr>
+                  <th>Painting number</th>
+                  <th>Painting name</th>
+                  <th>Winner</th>
+                </tr>
+              </thead>
+              <tbody id="summaryRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
