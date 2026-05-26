@@ -125,7 +125,7 @@ export function bidSummary(paintings, bids) {
 export function validateSubmission(name, paintings, bids) {
   const errors = [];
   const summary = bidSummary(paintings, bids);
-  const requiredPaintings = Math.min(CONFIG.requiredPaintings, paintings.length);
+  const minimumPaintings = Math.min(CONFIG.minPaintings, paintings.length);
 
   if (!cleanName(name)) {
     errors.push("Enter your name above");
@@ -133,8 +133,8 @@ export function validateSubmission(name, paintings, bids) {
   if (Math.abs(summary.total - CONFIG.totalCredits) > EPSILON) {
     errors.push(`Allocate exactly ${CONFIG.totalCredits} credits total`);
   }
-  if (summary.distinct !== requiredPaintings) {
-    errors.push(`Allocate your credits across exactly ${requiredPaintings} paintings`);
+  if (summary.distinct < minimumPaintings) {
+    errors.push(`Allocate your credits across at least ${minimumPaintings} paintings`);
   }
   if (summary.overMax.length > 0) {
     errors.push(`No painting can receive more than ${CONFIG.maxPerPainting} credits`);

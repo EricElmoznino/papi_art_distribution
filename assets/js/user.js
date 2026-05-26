@@ -133,7 +133,7 @@ function updateState() {
 
   setMetricState(elements.remaining, Math.abs(remaining) < 1e-9);
   setMetricState(elements.allocated, Math.abs(total - CONFIG.totalCredits) < 1e-9);
-  setMetricState(elements.selected, validation.summary.distinct === Math.min(CONFIG.requiredPaintings, paintings.length));
+  setMetricState(elements.selected, validation.summary.distinct >= Math.min(CONFIG.minPaintings, paintings.length));
   renderSelectionStrip(validation.summary.normalized);
 
   if (validation.valid) {
