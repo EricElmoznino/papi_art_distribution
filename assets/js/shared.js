@@ -1,6 +1,7 @@
 export const CONFIG = Object.freeze({
   totalCredits: 100,
   maxPerPainting: 50,
+  requiredPaintings: 6,
   minPaintings: 6,
   submissionPrefix: "PAPI_ART_BID_V1:",
   storage: {
@@ -124,19 +125,19 @@ export function bidSummary(paintings, bids) {
 export function validateSubmission(name, paintings, bids) {
   const errors = [];
   const summary = bidSummary(paintings, bids);
-  const minimumPaintings = Math.min(CONFIG.minPaintings, paintings.length);
+  const requiredPaintings = Math.min(CONFIG.requiredPaintings, paintings.length);
 
   if (!cleanName(name)) {
-    errors.push("Enter a name.");
+    errors.push("Enter your name above");
   }
   if (Math.abs(summary.total - CONFIG.totalCredits) > EPSILON) {
-    errors.push(`Allocate exactly ${CONFIG.totalCredits} credits.`);
+    errors.push(`Allocate exactly ${CONFIG.totalCredits} credits total`);
   }
-  if (summary.distinct < minimumPaintings) {
-    errors.push(`Use at least ${minimumPaintings} different paintings.`);
+  if (summary.distinct !== requiredPaintings) {
+    errors.push(`Allocate your credits across exactly ${requiredPaintings} paintings`);
   }
   if (summary.overMax.length > 0) {
-    errors.push(`No painting can receive more than ${CONFIG.maxPerPainting} credits.`);
+    errors.push(`No painting can receive more than ${CONFIG.maxPerPainting} credits`);
   }
   if (summary.negative.length > 0) {
     errors.push("Credits cannot be negative.");
@@ -160,6 +161,7 @@ export async function makeSubmissionToken(name, paintings, bids) {
     name: cleanName(name),
     totalCredits: CONFIG.totalCredits,
     maxPerPainting: CONFIG.maxPerPainting,
+    requiredPaintings: CONFIG.requiredPaintings,
     minPaintings: CONFIG.minPaintings,
     paintingIds: paintings.map((painting) => painting.id),
     paintingsFingerprint: await paintingsFingerprint(paintings),

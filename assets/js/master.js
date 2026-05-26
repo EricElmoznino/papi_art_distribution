@@ -264,6 +264,7 @@ function runAuction() {
     config: {
       totalCredits: CONFIG.totalCredits,
       maxPerPainting: CONFIG.maxPerPainting,
+      requiredPaintings: CONFIG.requiredPaintings,
       minPaintings: CONFIG.minPaintings,
     },
   };

@@ -11,6 +11,7 @@
   --danger: #a32f24;
   --shadow: 0 8px 30px rgba(31, 27, 21, 0.09);
   --radius: 8px;
+  --participant-topbar-height: 86px;
 }
 
 * {
@@ -64,6 +65,30 @@ a {
 
 .participant-topbar {
   align-items: stretch;
+}
+
+.participant-topbar .brand-block {
+  display: grid;
+  gap: 8px;
+  min-width: min(420px, 100%);
+}
+
+.participant-name-block {
+  width: min(360px, 100%);
+}
+
+.participant-name-block .field-label {
+  margin-bottom: 4px;
+}
+
+.participant-name-block .text-input {
+  min-height: 38px;
+}
+
+.participant-name-block .compact-help {
+  max-width: 470px;
+  margin-top: 6px;
+  font-size: 0.84rem;
 }
 
 .brand-block h1,
@@ -169,7 +194,7 @@ a {
 
 .sticky-summary {
   position: sticky;
-  top: 83px;
+  top: calc(var(--participant-topbar-height) + 8px);
   z-index: 15;
   margin: 14px 0 18px;
 }
@@ -243,35 +268,65 @@ a {
   font-weight: 700;
 }
 
+.validation-message.error span {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.validation-message.error ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.validation-message.error li {
+  margin: 2px 0;
+}
+
 .validation-message.ok {
   color: var(--accent-strong);
   font-weight: 700;
 }
 
 .selection-strip {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   min-height: 36px;
-  gap: 8px;
-  align-items: center;
-  overflow-x: auto;
-  padding-bottom: 6px;
+  max-height: 190px;
+  gap: 6px;
+  align-items: stretch;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 
 .selection-chip {
-  flex: 0 0 auto;
   display: inline-flex;
   gap: 8px;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
   padding: 6px 8px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: #f8fbfa;
   font-size: 0.86rem;
-  white-space: nowrap;
+  white-space: normal;
+}
+
+.selection-chip span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .selection-chip strong {
   color: var(--accent-strong);
+}
+
+.metric-good {
+  color: var(--accent-strong);
+}
+
+.metric-bad {
+  color: var(--danger);
 }
 
 .action-row,
@@ -715,7 +770,6 @@ a {
 @media (max-width: 920px) {
   .topbar,
   .participant-topbar {
-    position: static;
     align-items: stretch;
     flex-direction: column;
   }
@@ -723,10 +777,6 @@ a {
   .credit-panel,
   .results-progress {
     justify-content: space-between;
-  }
-
-  .sticky-summary {
-    top: 0;
   }
 
   .painting-list,

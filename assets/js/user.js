@@ -15,6 +15,7 @@ let bids = {};
 let zoom = 1;
 
 const elements = {
+  header: document.querySelector(".participant-topbar"),
   name: document.querySelector("#participantName"),
   remaining: document.querySelector("#remainingCredits"),
   allocated: document.querySelector("#allocatedCredits"),
@@ -49,6 +50,7 @@ async function init() {
     }
     renderPaintings();
     bindEvents();
+    syncStickyOffset();
     updateState();
   } catch (error) {
     elements.list.innerHTML = `<p class="validation-message error">${error.message}</p>`;
@@ -56,6 +58,11 @@ async function init() {
 }
 
 function bindEvents() {
+  if ("ResizeObserver" in window) {
+    new ResizeObserver(syncStickyOffset).observe(elements.header);
+  } else {
+    window.addEventListener("resize", syncStickyOffset);
+  }
   elements.name.addEventListener("input", () => {
     persistDraft();
     updateState();
@@ -124,15 +131,26 @@ function updateState() {
   elements.selected.textContent = String(validation.summary.distinct);
   elements.copy.disabled = !validation.valid;
 
+  setMetricState(elements.remaining, Math.abs(remaining) < 1e-9);
+  setMetricState(elements.allocated, Math.abs(total - CONFIG.totalCredits) < 1e-9);
+  setMetricState(elements.selected, validation.summary.distinct === Math.min(CONFIG.requiredPaintings, paintings.length));
   renderSelectionStrip(validation.summary.normalized);
 
   if (validation.valid) {
     elements.validation.textContent = "Ready to copy.";
     elements.validation.className = "validation-message ok";
   } else {
-    elements.validation.textContent = validation.errors.join(" ");
+    elements.validation.innerHTML = `
+      <span>Please correct the following before submitting your choices:</span>
+      <ul>${validation.errors.map((error) => `<li>${error}</li>`).join("")}</ul>
+    `;
     elements.validation.className = "validation-message error";
   }
+}
+
+function setMetricState(element, valid) {
+  element.classList.toggle("metric-good", valid);
+  element.classList.toggle("metric-bad", !valid);
 }
 
 function renderSelectionStrip(normalized) {
@@ -220,4 +238,11 @@ function setZoom(nextZoom) {
   elements.modalImage.style.width = `${Math.round(zoom * 100)}%`;
   elements.modalImage.style.maxWidth = "none";
   elements.modalImage.style.maxHeight = "none";
+}
+
+function syncStickyOffset() {
+  if (!elements.header) {
+    return;
+  }
+  document.documentElement.style.setProperty("--participant-topbar-height", `${Math.ceil(elements.header.offsetHeight)}px`);
 }
