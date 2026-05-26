@@ -4,7 +4,8 @@ A simple website to run an auction for distributing items (art works, in this ca
 
 ## Pages
 
-- `index.html`: participant page for entering a name, assigning credits, and copying the submission token.
+- `index.html`: family-facing introduction that explains the process and links to the entry page.
+- `allocations.html`: participant page for entering a name, assigning credits, and copying the submission token.
 - `master.html`: auction-master page for pasting participant tokens, editing entries, choosing the deterministic tie-break seed, and launching results.
 - `results.html`: live reveal page that shows paintings in order of initial popularity and reveals winners one at a time.
 

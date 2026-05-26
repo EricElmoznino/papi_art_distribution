@@ -70,7 +70,8 @@ a {
 .participant-topbar .brand-block {
   display: grid;
   gap: 8px;
-  min-width: min(420px, 100%);
+  width: min(420px, 100%);
+  min-width: 0;
 }
 
 .participant-name-block {
@@ -89,6 +90,14 @@ a {
   max-width: 470px;
   margin-top: 6px;
   font-size: 0.84rem;
+}
+
+.topbar-summary-slot {
+  min-width: 0;
+}
+
+.summary-flow-slot {
+  margin: 14px 0 18px;
 }
 
 .brand-block h1,
@@ -124,6 +133,79 @@ a {
   width: min(1180px, 100%);
   margin: 0 auto;
   padding: 18px clamp(14px, 3vw, 34px) 48px;
+}
+
+.home-shell {
+  width: min(1060px, 100%);
+  padding-top: clamp(24px, 5vw, 58px);
+}
+
+.intro-section {
+  display: grid;
+  gap: clamp(22px, 4vw, 42px);
+}
+
+.intro-copy {
+  max-width: 760px;
+}
+
+.intro-copy h2 {
+  margin: 0;
+  font-size: 4rem;
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+.intro-copy p {
+  max-width: 690px;
+  margin: 16px 0 0;
+  color: #3f4246;
+  font-size: 1.12rem;
+}
+
+.intro-rules {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 660px;
+  margin-top: 22px;
+}
+
+.intro-rules > div {
+  min-height: 82px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.intro-rules strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink);
+  font-size: 1.25rem;
+}
+
+.intro-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.intro-art-strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.intro-art-strip img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #ece8df;
 }
 
 .participant-shell {
@@ -193,10 +275,12 @@ a {
 }
 
 .sticky-summary {
-  position: sticky;
-  top: calc(var(--participant-topbar-height) + 8px);
   z-index: 15;
-  margin: 14px 0 18px;
+  margin: 0;
+}
+
+.summary-flow-slot .sticky-summary {
+  margin: 0;
 }
 
 .field-label {
@@ -767,6 +851,90 @@ a {
   text-align: center;
 }
 
+@media (min-width: 921px) {
+  .summary-flow-slot {
+    display: none;
+  }
+
+  .participant-topbar {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .participant-topbar .brand-block {
+    min-width: 0;
+  }
+
+  .participant-topbar .sticky-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 10px;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .participant-topbar .selection-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+    min-height: 38px;
+    gap: 6px;
+    overflow: visible;
+    padding-right: 2px;
+  }
+
+  .participant-topbar .selection-chip {
+    width: auto;
+    max-width: min(250px, 100%);
+    min-height: 34px;
+    padding: 5px 7px;
+  }
+
+  .participant-topbar .selection-chip span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .participant-topbar .action-row {
+    align-self: start;
+    flex-wrap: nowrap;
+    margin-top: 0;
+  }
+
+  .participant-topbar .primary-button,
+  .participant-topbar .secondary-button {
+    min-height: 38px;
+    padding: 7px 11px;
+    white-space: nowrap;
+  }
+
+  .participant-topbar .validation-message {
+    grid-column: 1 / -1;
+    margin: 0;
+    min-height: 1.1em;
+    font-size: 0.84rem;
+  }
+
+  .participant-topbar .validation-message.error ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 16px;
+  }
+
+  .participant-topbar .submission-output {
+    grid-column: 1 / -1;
+    min-height: 54px;
+    margin-top: 0;
+  }
+}
+
 @media (max-width: 920px) {
   .topbar,
   .participant-topbar {
@@ -793,6 +961,10 @@ a {
   .feature-copy h2 {
     font-size: 2.2rem;
   }
+
+  .intro-copy h2 {
+    font-size: 3rem;
+  }
 }
 
 @media (max-width: 620px) {
@@ -800,6 +972,15 @@ a {
   .results-shell {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .intro-copy h2 {
+    font-size: 2.15rem;
+  }
+
+  .intro-rules,
+  .intro-art-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .painting-card {

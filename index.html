@@ -5,71 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Papi Art Distribution</title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <script type="module" src="assets/js/user.js"></script>
   </head>
-  <body>
-    <header class="topbar participant-topbar">
+  <body class="home-body">
+    <header class="topbar home-topbar">
       <div class="brand-block">
         <p class="eyebrow">Papi Art Distribution</p>
-        <h1>Choose Your Paintings</h1>
-        <div class="participant-name-block">
-          <label class="field-label" for="participantName">Your name</label>
-          <input id="participantName" class="text-input" type="text" autocomplete="name" placeholder="Enter your name">
-          <p class="compact-help">Allocate exactly 100 credits, no more than 50 on one painting, across 6 or more paintings.</p>
-        </div>
-      </div>
-      <div class="credit-panel" aria-live="polite">
-        <div>
-          <span class="metric-label">Remaining</span>
-          <strong id="remainingCredits">100</strong>
-        </div>
-        <div>
-          <span class="metric-label">Allocated</span>
-          <strong id="allocatedCredits">0</strong>
-        </div>
-        <div>
-          <span class="metric-label">Paintings</span>
-          <strong id="selectedCount">0</strong>
-        </div>
+        <h1>How This Works</h1>
       </div>
     </header>
 
-    <main class="page-shell participant-shell">
-      <section class="notice-strip" role="note">
-        Please do not press the browser back button while making selections, or the current screen may be lost.
-      </section>
-
-      <section class="sticky-summary" aria-label="Current selections">
-        <div class="selection-strip" id="selectionStrip">
-          <span class="muted">No credits allocated yet.</span>
+    <main class="page-shell home-shell">
+      <section class="intro-section" aria-labelledby="introTitle">
+        <div class="intro-copy">
+          <p class="eyebrow">Before you choose</p>
+          <h2 id="introTitle">Use credits to show which paintings would mean the most to you.</h2>
+          <p>
+            This is a little like an auction, except the credits are not money and nobody is paying for anything.
+            Everyone privately makes one set of choices up front, and those choices are used later to help assign
+            the paintings.
+          </p>
+          <p>
+            You will start with 100 credits. Put more credits on paintings you would be especially happy to receive,
+            and fewer credits on paintings that are still meaningful but less important to you. Please leave a painting
+            at zero if you would not want to receive it.
+          </p>
+          <p>
+            After everyone has submitted their choices, the process uses the credits as preference signals. It tries
+            to share paintings broadly among the people who wanted them, and exact ties are handled automatically.
+          </p>
+          <div class="intro-rules" aria-label="Entry requirements">
+            <div>
+              <span class="metric-label">Credits</span>
+              <strong>100 total</strong>
+            </div>
+            <div>
+              <span class="metric-label">Per painting</span>
+              <strong>50 max</strong>
+            </div>
+            <div>
+              <span class="metric-label">Paintings</span>
+              <strong>6 or more</strong>
+            </div>
+          </div>
+          <a class="primary-link intro-action" href="allocations.html">Start Choosing Paintings</a>
         </div>
-        <div class="action-row">
-          <button id="copySubmission" class="primary-button" type="button" disabled>Copy Data</button>
-          <button id="clearBids" class="secondary-button" type="button">Clear</button>
+        <div class="intro-art-strip" aria-label="Painting preview">
+          <img src="assets/images/1.jpg" alt="">
+          <img src="assets/images/6.jpg" alt="">
+          <img src="assets/images/10.jpg" alt="">
+          <img src="assets/images/16.jpg" alt="">
+          <img src="assets/images/22.jpg" alt="">
+          <img src="assets/images/31.jpg" alt="">
         </div>
-        <p id="validationMessage" class="validation-message" role="status"></p>
-        <textarea id="submissionOutput" class="submission-output" readonly aria-label="Copied submission data"></textarea>
       </section>
-
-      <section id="paintingList" class="painting-list" aria-label="Paintings"></section>
     </main>
-
-    <div id="imageModal" class="image-modal" hidden>
-      <div class="modal-toolbar">
-        <div>
-          <p id="modalTitle" class="modal-title"></p>
-          <p id="modalMeta" class="modal-meta"></p>
-        </div>
-        <div class="modal-actions">
-          <button id="zoomOut" class="icon-button" type="button" aria-label="Zoom out">-</button>
-          <button id="zoomReset" class="icon-button" type="button" aria-label="Reset zoom">Fit</button>
-          <button id="zoomIn" class="icon-button" type="button" aria-label="Zoom in">+</button>
-          <button id="closeModal" class="icon-button close-button" type="button" aria-label="Close image">x</button>
-        </div>
-      </div>
-      <div id="modalImageWrap" class="modal-image-wrap">
-        <img id="modalImage" alt="">
-      </div>
-    </div>
   </body>
 </html>

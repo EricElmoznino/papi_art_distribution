@@ -38,7 +38,8 @@ Then open `http://localhost:8000/`. Serving over HTTP is preferable because the 
 
 ## Repository Map
 
-- `index.html`: participant page.
+- `index.html`: family-facing home page explaining the process before entry.
+- `allocations.html`: participant page.
 - `master.html`: auction-master page.
 - `results.html`: live results/reveal page.
 - `assets/css/styles.css`: all styling and responsive layout.
@@ -100,9 +101,15 @@ Important validation behavior:
 
 `validateSubmission()` uses `CONFIG.minPaintings` as the minimum selected-painting threshold. `requiredPaintings` is still present in config and submission payloads for compatibility with the existing token shape.
 
+## Home Page
+
+`index.html` is the first page family members should see. It gives an intuitive explanation of the process, emphasizes that credits represent subjective preference rather than money, and links to `allocations.html`.
+
+Keep this explanation simple. Do not add a mechanistic explanation of the allocation algorithm to the home page.
+
 ## Participant Page
 
-`index.html` plus `assets/js/user.js` implements the participant flow:
+`allocations.html` plus `assets/js/user.js` implements the participant flow:
 
 - Loads paintings from `assets/data.csv`.
 - Restores the participant's in-progress draft from `localStorage` key `papiArt.participantDraft.v1`.

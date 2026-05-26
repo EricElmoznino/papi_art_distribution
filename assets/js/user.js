@@ -13,9 +13,13 @@ import {
 let paintings = [];
 let bids = {};
 let zoom = 1;
+const desktopSummaryQuery = window.matchMedia("(min-width: 921px)");
 
 const elements = {
   header: document.querySelector(".participant-topbar"),
+  summary: document.querySelector("#participantSummary"),
+  desktopSummarySlot: document.querySelector("#desktopSummarySlot"),
+  mobileSummarySlot: document.querySelector("#mobileSummarySlot"),
   name: document.querySelector("#participantName"),
   remaining: document.querySelector("#remainingCredits"),
   allocated: document.querySelector("#allocatedCredits"),
@@ -50,6 +54,7 @@ async function init() {
     }
     renderPaintings();
     bindEvents();
+    placeSummary();
     syncStickyOffset();
     updateState();
   } catch (error) {
@@ -62,6 +67,11 @@ function bindEvents() {
     new ResizeObserver(syncStickyOffset).observe(elements.header);
   } else {
     window.addEventListener("resize", syncStickyOffset);
+  }
+  if (desktopSummaryQuery.addEventListener) {
+    desktopSummaryQuery.addEventListener("change", placeSummary);
+  } else {
+    desktopSummaryQuery.addListener(placeSummary);
   }
   elements.name.addEventListener("input", () => {
     persistDraft();
@@ -83,6 +93,17 @@ function bindEvents() {
       closeImageModal();
     }
   });
+}
+
+function placeSummary() {
+  const target = desktopSummaryQuery.matches ? elements.desktopSummarySlot : elements.mobileSummarySlot;
+  if (!target || !elements.summary) {
+    return;
+  }
+  if (elements.summary.parentElement !== target) {
+    target.append(elements.summary);
+  }
+  syncStickyOffset();
 }
 
 function renderPaintings() {
@@ -146,6 +167,7 @@ function updateState() {
     `;
     elements.validation.className = "validation-message error";
   }
+  syncStickyOffset();
 }
 
 function setMetricState(element, valid) {
@@ -193,6 +215,7 @@ async function copySubmission() {
     elements.validation.textContent = "Clipboard access was blocked. Select and copy the data shown below.";
     elements.validation.className = "validation-message error";
   }
+  syncStickyOffset();
 }
 
 function clearAllBids() {
