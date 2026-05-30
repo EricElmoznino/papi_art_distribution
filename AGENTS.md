@@ -116,6 +116,7 @@ Keep this explanation simple. Do not add a mechanistic explanation of the alloca
 - Lets the participant enter a name and credits per painting.
 - Shows remaining credits, allocated credits, and selected painting count.
 - Validates continuously using `validateSubmission()`.
+- On mobile, keeps copy controls and validation feedback in the sticky header while placing the name field and selected-painting summary in the normal page flow.
 - Enables `Copy Data` only when the entry is valid.
 - Creates a `PAPI_ART_BID_V1:` submission token with `makeSubmissionToken()`.
 - Copies the token to the clipboard when available, and also displays it in a readonly textarea as a fallback.
@@ -397,7 +398,7 @@ The app is responsive through CSS media queries in `assets/css/styles.css`:
 - Participant cards use a two-column grid on wider screens and collapse to one column below 920px.
 - Master panels also collapse below 920px.
 - Results use a large image/copy split layout on desktop and a single column on smaller screens.
-- The participant summary is sticky and uses a CSS variable `--participant-topbar-height` updated by `user.js` so it sits below the sticky topbar.
+- On mobile, the participant name and selected-painting summary move into the normal page flow while the action and validation area remains in the sticky topbar.
 
 Keep the interface simple and family-friendly. Avoid turning the credits into money language such as bids, price, auction price, payment, or value in visible copy when possible. The code uses "bid" internally because it is concise, but user-facing text should emphasize preferences and credits.
 

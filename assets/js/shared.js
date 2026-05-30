@@ -128,7 +128,7 @@ export function validateSubmission(name, paintings, bids) {
   const minimumPaintings = Math.min(CONFIG.minPaintings, paintings.length);
 
   if (!cleanName(name)) {
-    errors.push("Enter your name above");
+    errors.push("Enter your name");
   }
   if (Math.abs(summary.total - CONFIG.totalCredits) > EPSILON) {
     errors.push(`Allocate exactly ${CONFIG.totalCredits} credits total`);

@@ -18,8 +18,14 @@ const desktopSummaryQuery = window.matchMedia("(min-width: 921px)");
 const elements = {
   header: document.querySelector(".participant-topbar"),
   summary: document.querySelector("#participantSummary"),
+  nameBlock: document.querySelector("#participantNameBlock"),
+  desktopNameSlot: document.querySelector("#desktopNameSlot"),
+  mobileNameSlot: document.querySelector("#mobileNameSlot"),
   desktopSummarySlot: document.querySelector("#desktopSummarySlot"),
-  mobileSummarySlot: document.querySelector("#mobileSummarySlot"),
+  mobileActionsSlot: document.querySelector("#mobileActionsSlot"),
+  mobileSelectionSlot: document.querySelector("#mobileSelectionSlot"),
+  selection: document.querySelector("#participantSelection"),
+  actions: document.querySelector("#participantActions"),
   name: document.querySelector("#participantName"),
   remaining: document.querySelector("#remainingCredits"),
   allocated: document.querySelector("#allocatedCredits"),
@@ -96,12 +102,18 @@ function bindEvents() {
 }
 
 function placeSummary() {
-  const target = desktopSummaryQuery.matches ? elements.desktopSummarySlot : elements.mobileSummarySlot;
-  if (!target || !elements.summary) {
+  if (!elements.summary || !elements.nameBlock || !elements.selection || !elements.actions) {
     return;
   }
-  if (elements.summary.parentElement !== target) {
-    target.append(elements.summary);
+
+  if (desktopSummaryQuery.matches) {
+    elements.desktopNameSlot.append(elements.nameBlock);
+    elements.summary.append(elements.selection, elements.actions);
+    elements.desktopSummarySlot.append(elements.summary);
+  } else {
+    elements.mobileNameSlot.append(elements.nameBlock);
+    elements.mobileActionsSlot.append(elements.actions);
+    elements.mobileSelectionSlot.append(elements.selection);
   }
   syncStickyOffset();
 }
@@ -171,8 +183,9 @@ function updateState() {
 }
 
 function setMetricState(element, valid) {
-  element.classList.toggle("metric-good", valid);
-  element.classList.toggle("metric-bad", !valid);
+  const metricBox = element.parentElement;
+  metricBox.classList.toggle("metric-good", valid);
+  metricBox.classList.toggle("metric-bad", !valid);
 }
 
 function renderSelectionStrip(normalized) {

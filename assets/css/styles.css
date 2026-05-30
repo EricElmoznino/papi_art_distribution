@@ -9,6 +9,12 @@
   --rose: #9f3655;
   --gold: #b07a19;
   --danger: #a32f24;
+  --metric-good-bg: #e5f2ea;
+  --metric-good-line: #b5d4c0;
+  --metric-good-ink: #245c43;
+  --metric-bad-bg: #f8e6e2;
+  --metric-bad-line: #e3bbb5;
+  --metric-bad-ink: #8b332b;
   --shadow: 0 8px 30px rgba(31, 27, 21, 0.09);
   --radius: 8px;
   --participant-topbar-height: 86px;
@@ -98,6 +104,11 @@ a {
 
 .summary-flow-slot {
   margin: 14px 0 18px;
+}
+
+.mobile-name-slot,
+.mobile-actions-slot {
+  display: none;
 }
 
 .brand-block h1,
@@ -405,12 +416,21 @@ a {
   color: var(--accent-strong);
 }
 
-.metric-good {
-  color: var(--accent-strong);
+.credit-panel > div.metric-good {
+  border-color: var(--metric-good-line);
+  background: var(--metric-good-bg);
+  color: var(--metric-good-ink);
 }
 
-.metric-bad {
-  color: var(--danger);
+.credit-panel > div.metric-bad {
+  border-color: var(--metric-bad-line);
+  background: var(--metric-bad-bg);
+  color: var(--metric-bad-ink);
+}
+
+.credit-panel > div.metric-good .metric-label,
+.credit-panel > div.metric-bad .metric-label {
+  color: inherit;
 }
 
 .action-row,
@@ -878,6 +898,10 @@ a {
     box-shadow: none;
   }
 
+  .participant-topbar .participant-actions {
+    display: contents;
+  }
+
   .participant-topbar .selection-strip {
     display: flex;
     flex-wrap: wrap;
@@ -945,6 +969,42 @@ a {
   .credit-panel,
   .results-progress {
     justify-content: space-between;
+  }
+
+  .mobile-name-slot,
+  .mobile-actions-slot {
+    display: block;
+  }
+
+  #desktopNameSlot,
+  .topbar-summary-slot {
+    display: none;
+  }
+
+  .mobile-name-slot {
+    margin-bottom: 14px;
+  }
+
+  .mobile-actions-slot .action-row {
+    margin-top: 0;
+  }
+
+  .mobile-actions-slot .validation-message {
+    margin-top: 6px;
+    font-size: 0.84rem;
+  }
+
+  .mobile-actions-slot .submission-output {
+    min-height: 54px;
+    margin-top: 6px;
+  }
+
+  .summary-flow-slot .selection-panel {
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
   }
 
   .painting-list,

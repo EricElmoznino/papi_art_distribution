@@ -12,13 +12,32 @@
       <div class="brand-block">
         <p class="eyebrow">Papi Art Distribution</p>
         <h1>Choose Your Paintings</h1>
-        <div class="participant-name-block">
-          <label class="field-label" for="participantName">Your name</label>
-          <input id="participantName" class="text-input" type="text" autocomplete="name" placeholder="Enter your name">
-          <p class="compact-help">Allocate exactly 100 credits, no more than 50 on one painting, across 6 or more paintings.</p>
+        <div id="desktopNameSlot">
+          <div id="participantNameBlock" class="participant-name-block">
+            <label class="field-label" for="participantName">Your name</label>
+            <input id="participantName" class="text-input" type="text" autocomplete="name" placeholder="Enter your name">
+            <p class="compact-help">Allocate exactly 100 credits, no more than 50 on one painting, across 6 or more paintings.</p>
+          </div>
         </div>
       </div>
-      <div id="desktopSummarySlot" class="topbar-summary-slot"></div>
+      <div id="desktopSummarySlot" class="topbar-summary-slot">
+        <section id="participantSummary" class="sticky-summary" aria-label="Current selections">
+          <section id="participantSelection" class="selection-panel" aria-label="Selected paintings">
+            <div class="selection-strip" id="selectionStrip">
+              <span class="muted">No credits allocated yet.</span>
+            </div>
+          </section>
+          <div id="participantActions" class="participant-actions">
+            <div class="action-row">
+              <button id="copySubmission" class="primary-button" type="button" disabled>Copy My Choices</button>
+              <button id="clearBids" class="secondary-button" type="button">Clear</button>
+            </div>
+            <p id="validationMessage" class="validation-message" role="status"></p>
+            <textarea id="submissionOutput" class="submission-output" readonly aria-label="Copied submission data"></textarea>
+          </div>
+        </section>
+      </div>
+      <div id="mobileActionsSlot" class="mobile-actions-slot"></div>
       <div class="credit-panel" aria-live="polite">
         <div>
           <span class="metric-label">Remaining</span>
@@ -36,23 +55,13 @@
     </header>
 
     <main class="page-shell participant-shell">
+      <div id="mobileNameSlot" class="mobile-name-slot"></div>
+
       <section class="notice-strip" role="note">
         Keep this page open until you have copied your choices. Your draft is saved on this device while you work.
       </section>
 
-      <div id="mobileSummarySlot" class="summary-flow-slot">
-        <section id="participantSummary" class="sticky-summary" aria-label="Current selections">
-          <div class="selection-strip" id="selectionStrip">
-            <span class="muted">No credits allocated yet.</span>
-          </div>
-          <div class="action-row">
-            <button id="copySubmission" class="primary-button" type="button" disabled>Copy My Choices</button>
-            <button id="clearBids" class="secondary-button" type="button">Clear</button>
-          </div>
-          <p id="validationMessage" class="validation-message" role="status"></p>
-          <textarea id="submissionOutput" class="submission-output" readonly aria-label="Copied submission data"></textarea>
-        </section>
-      </div>
+      <div id="mobileSelectionSlot" class="summary-flow-slot"></div>
 
       <section id="paintingList" class="painting-list" aria-label="Paintings"></section>
     </main>
