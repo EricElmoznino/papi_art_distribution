@@ -174,7 +174,7 @@ function updateState() {
     elements.validation.className = "validation-message ok";
   } else {
     elements.validation.innerHTML = `
-      <span>Please correct the following before submitting your choices:</span>
+      <span>Please correct the following before pressing "Copy My Choices":</span>
       <ul>${validation.errors.map((error) => `<li>${error}</li>`).join("")}</ul>
     `;
     elements.validation.className = "validation-message error";
